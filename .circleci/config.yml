@@ -1,11 +1,10 @@
-executors:
-  my-executor:
-    docker:
-      - image: aws-eks/python3
-
+version: '2.1'
+orbs:
+  aws-eks: circleci/aws-eks@2.0
+  kubernetes: circleci/kubernetes@1.0
 jobs:
   test-cluster:
-    executor: my-executor
+    executor: aws-eks/python3
     parameters:
       cluster-name:
         description: |
@@ -17,12 +16,8 @@ jobs:
           cluster-name: << parameters.cluster-name >>
       - run:
           command: |
-            kubectl get services && sleep 300
+            kubectl get services
           name: Test cluster
-orbs:
-  aws-eks: circleci/aws-eks@2.0
-  kubernetes: circleci/kubernetes@1.0
-version: 2.1
 workflows:
   deployment:
     jobs:
