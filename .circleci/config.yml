@@ -1,7 +1,8 @@
 version: 2.1
+
 orbs:
   aws-cli: circleci/aws-cli@2.0.3
-  kubernetes: circleci/kubernetes@0.12.0
+  kubernetes: circleci/kubernetes@0.4.0
   aws-eks: circleci/aws-eks@0.2.3
 
 jobs:
@@ -20,10 +21,6 @@ jobs:
           command: |
             kubectl get services && sleep 300
           name: Test cluster
-orbs:
-  aws-eks: circleci/aws-eks@0.2.3
-  kubernetes: circleci/kubernetes@0.4.0
-version: 2.1
 workflows:
   deployment:
     jobs:
