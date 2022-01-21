@@ -35,7 +35,6 @@ jobs:
       - kubernetes/create-or-update-resource:
           resource-file-path: service.json
           resource-name: service/bluegreenlb
-       
   create-small-cluster:
     executor: aws-eks/python3
     parameters:
@@ -71,9 +70,9 @@ jobs:
           nodes-max: 2
           ssh-access: false
           ssh-public-key: ''
-    - save_cache:
-          paths: ~/
-          key: ekctl-build
+      - save_cache:
+            paths: ~/
+            key: ekctl-build
 orbs:
   aws-eks: circleci/aws-eks@1.1.0
   kubernetes: circleci/kubernetes@0.4.0
