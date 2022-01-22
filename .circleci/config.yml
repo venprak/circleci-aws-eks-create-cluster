@@ -105,7 +105,7 @@ jobs:
     parameters:
       cluster-name:
         description: |
-          rm-capstone
+          capstoneproject
         type: string
     steps:
       - checkout
@@ -151,14 +151,14 @@ workflows:
       # - test-deployment:
       #     cluster-name: eks-demo-deployment
 
-      - aws-eks/update-container-image:
-          cluster-name: eks-demo-deployment
-          container-image-updates: "blue=andresaaap/testblueimage:latest"
-          record: true
-          # requires:
-          #   - create-deployment
-          resource-name: deployment/blue
-      # - delete-cluster:
+      # - aws-eks/update-container-image:
       #     cluster-name: eks-demo-deployment
+      #     container-image-updates: "blue=andresaaap/testblueimage:latest"
+      #     record: true
+      #     requires:
+      #       - create-deployment
+      #     resource-name: deployment/blue
+      - delete-cluster:
+          cluster-name: eks-demo-deployment
       # requires:
       #   - delay
