@@ -1,3 +1,9 @@
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@2.0.3
+  kubernetes: circleci/kubernetes@0.4.0
+  aws-eks: circleci/aws-eks@0.2.3
+
 jobs:
   create-deployment:
     executor: aws-eks/python3
@@ -40,7 +46,7 @@ jobs:
     steps:
       - checkout
       - aws-eks/install-aws-iam-authenticator:
-          release-tag: ''
+          release-tag: ""
       - aws-eks/create-cluster:
           cluster-name: << parameters.cluster-name >>
           skip-kubectl-install: false
@@ -48,12 +54,8 @@ jobs:
           node-type: t2.small
           nodes-max: 2
           ssh-access: false
-          ssh-public-key: ''
+          ssh-public-key: ""
 
-orbs:
-  aws-eks: circleci/aws-eks@1.1.0
-  kubernetes: circleci/kubernetes@0.4.0
-version: 2.1
 workflows:
   deployment:
     jobs:
@@ -69,7 +71,7 @@ workflows:
             - create-service
       - aws-eks/update-container-image:
           cluster-name: eks-demo-deployment
-          container-image-updates: 'blue=andresaaap/testblueimage:latest'
+          container-image-updates: "blue=andresaaap/testblueimage:latest"
           record: true
           requires:
             - create-deployment
