@@ -75,7 +75,7 @@ jobs:
           resource-file-path: service.json
           resource-name: service/bluegreenlb
 
-   test-deployment:
+  test-deployment:
     executor: aws-eks/python3
     parameters:
       cluster-name:
