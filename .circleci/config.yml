@@ -75,6 +75,24 @@ jobs:
           resource-file-path: service.json
           resource-name: service/bluegreenlb
 
+   test-deployment:
+    executor: aws-eks/python3
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+    steps:
+      - kubernetes/install
+      - aws-eks/update-kubeconfig-with-authenticator:
+          cluster-name: << parameters.cluster-name >>
+      - run:
+          name: Kube cluster
+          command: |
+            kubectl get svc
+            kubectl get nodes
+            kubectl get deployment
+
   delay:
     executor: aws-eks/python3
     steps:
@@ -125,12 +143,14 @@ workflows:
       #     requires:
       #       - delay
 
-      - create-service:
+      # - create-service:
+      #     cluster-name: eks-demo-deployment
+      #   cluster-name: eks-demo-deployment
+      #   requires:
+      #     - create-small-cluster
+      # - create-deployment:
+      #     cluster-name: eks-demo-deployment
+      #     requires:
+      #       - create-service
+      - test-deployment:
           cluster-name: eks-demo-deployment
-        # cluster-name: eks-demo-deployment
-        # requires:
-        #   - create-small-cluster
-      - create-deployment:
-          cluster-name: eks-demo-deployment
-          requires:
-            - create-service
