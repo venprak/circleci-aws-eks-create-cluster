@@ -138,10 +138,6 @@ workflows:
       # - delay:
       #     requires:
       #       - create-cluster
-      # - delete-cluster:
-      #     cluster-name: eks-demo-deployment
-      #     requires:
-      #       - delay
 
       # - create-service:
       #     cluster-name: eks-demo-deployment
@@ -152,5 +148,17 @@ workflows:
       #     cluster-name: eks-demo-deployment
       #     requires:
       #       - create-service
-      - test-deployment:
+      # - test-deployment:
+      #     cluster-name: eks-demo-deployment
+
+      - aws-eks/update-container-image:
           cluster-name: eks-demo-deployment
+          container-image-updates: "blue=andresaaap/testblueimage:latest"
+          record: true
+          # requires:
+          #   - create-deployment
+          resource-name: deployment/blue
+      # - delete-cluster:
+      #     cluster-name: eks-demo-deployment
+      # requires:
+      #   - delay
