@@ -125,7 +125,8 @@ workflows:
       #     requires:
       #       - delay
 
-      - create-service
+      - create-service:
+          cluster-name: eks-demo-deployment
         # cluster-name: eks-demo-deployment
         # requires:
         #   - create-small-cluster
