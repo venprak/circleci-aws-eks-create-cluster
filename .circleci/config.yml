@@ -133,23 +133,23 @@ jobs:
 workflows:
   deployment:
     jobs:
-      # - create-small-cluster:
-      #     cluster-name: eks-demo-deployment
-      # - delay:
-      #     requires:
-      #       - create-cluster
+       - create-small-cluster:
+           cluster-name: eks-demo-deployment
+       - delay:
+           requires:
+             - create-cluster
 
-      # - create-service:
-      #     cluster-name: eks-demo-deployment
-      #   cluster-name: eks-demo-deployment
-      #   requires:
-      #     - create-small-cluster
-      # - create-deployment:
-      #     cluster-name: eks-demo-deployment
-      #     requires:
-      #       - create-service
-      # - test-deployment:
-      #     cluster-name: eks-demo-deployment
+       - create-service:
+           cluster-name: eks-demo-deployment
+
+         requires:
+           - create-small-cluster
+       - create-deployment:
+           cluster-name: eks-demo-deployment
+           requires:
+             - create-service
+       - test-deployment:
+           cluster-name: eks-demo-deployment
 
       # - aws-eks/update-container-image:
       #     cluster-name: eks-demo-deployment
@@ -158,7 +158,7 @@ workflows:
       #     requires:
       #       - create-deployment
       #     resource-name: deployment/blue
-      - delete-cluster:
-          cluster-name: eks-demo-deployment
+      #- delete-cluster:
+      #    cluster-name: eks-demo-deployment
       # requires:
       #   - delay
