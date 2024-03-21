@@ -139,17 +139,17 @@ workflows:
            requires:
              - create-cluster
 
-       - create-service:
-           cluster-name: eks-demo-deployment
-
-         requires:
-           - create-small-cluster
-       - create-deployment:
-           cluster-name: eks-demo-deployment
-           requires:
-             - create-service
-       - test-deployment:
-           cluster-name: eks-demo-deployment
+    #   - create-service:
+     #      cluster-name: eks-demo-deployment
+     #    
+     #    requires:
+     #      - create-small-cluster
+     #  - create-deployment:
+     #      cluster-name: eks-demo-deployment
+     #      requires:
+     #        - create-service
+     #  - test-deployment:
+     #      cluster-name: eks-demo-deployment
 
       # - aws-eks/update-container-image:
       #     cluster-name: eks-demo-deployment
