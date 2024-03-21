@@ -137,7 +137,7 @@ workflows:
            cluster-name: eks-demo-deployment
        - delay:
            requires:
-             - create-cluster
+             - aws-eks/create-cluster
 
     #   - create-service:
      #      cluster-name: eks-demo-deployment
