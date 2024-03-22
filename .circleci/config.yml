@@ -25,9 +25,9 @@ workflows:
   deployment:
     jobs:
       - aws-eks/create-cluster:
-          cluster-name: my-eks-demo
+          cluster-name: my-eks-demo1
       - test-cluster:
-          cluster-name: my-eks-demo
+          cluster-name: my-eks-demo1
           requires:
             - aws-eks/create-cluster
    #   - aws-eks/delete-cluster:
