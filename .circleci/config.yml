@@ -19,6 +19,7 @@ jobs:
       - run:
           command: |
             kubectl get services
+            kubectl create deployment springapplication --image=280214392207.dkr.ecr.us-east-1.amazonaws.com/springapplication:springtest6-latest
           name: Test cluster
 workflows:
   deployment:
@@ -29,7 +30,7 @@ workflows:
           cluster-name: my-eks-demo
           requires:
             - aws-eks/create-cluster
-      - aws-eks/delete-cluster:
-          cluster-name: my-eks-demo
-          requires:
-            - test-cluster
+   #   - aws-eks/delete-cluster:
+   #       cluster-name: my-eks-demo
+   #       requires:
+   #         - test-cluster
